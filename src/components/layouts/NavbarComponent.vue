@@ -1,16 +1,16 @@
 <template>
 <div class="side">
-<p-button v-if="!user" type="button" @click="googleRegister" label="Войти" icon="pi pi-user"/>
+<Button v-if="!user" type="button" @click="googleRegister" label="Войти" icon="pi pi-user"/>
 
-<p-button v-else @click="googleLogout" label="Войти" icon="pi pi-sign-out"/>
+<Button v-else type="button"  @click="googleLogout" label="Выйти" icon="pi pi-sign-out"/>
 
 </div>
 </template>
 
 
 
-<script>
-import PButton from 'primevue/button'
+<script setup lang="ts">
+import Button from 'primevue/button'
 import {useUser} from '@/composables/useUser'
 
 const {user, googleRegister, googleLogout} = useUser()
