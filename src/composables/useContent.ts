@@ -6,11 +6,18 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
 import { useUser } from './useUser'
 
+
 export const useContent = () => {
   const content = ref()
   const contentList = ref([] as DocumentData)
   const newContent = ref({
-    author: ''
+    id:'',
+    name:'',
+    image:null,
+    location:'',
+    info:'',
+    contactus:'',
+    author: '' as any,
   })
 
   const loading = ref({
