@@ -8,7 +8,7 @@
           class="input inputfile"
           name="images"
           type="file"
-          accept=".jpg, .png"
+          accept=".jpg, .png, .JFIF"
           @input="onUpload($event)"
         />
         <label for="inputfile" class="inputfile-button">
