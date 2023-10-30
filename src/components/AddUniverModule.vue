@@ -66,6 +66,9 @@ async function addInfo() {
   await addContent()
   toogleVisible()
   createContent()
+  setTimeout(function(){
+	location.reload();
+}, 2000);
 }
 
 async function onUpload(e:any) {

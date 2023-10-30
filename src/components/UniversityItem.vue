@@ -5,10 +5,10 @@
       <template #header>
         <img alt="user header" src="https://primefaces.org/cdn/primevue/images/usercard.png" />
       </template>
-      <template #title>{{ content.name }}</template>
-      <template #subtitle>{{ content.city }}</template>
+      <template #title>{{ contentList.name }}</template>
+      <template #subtitle>{{ contentList.city }}</template>
       <template #content>
-        <p class="m-0">{{ content.discription }}</p>
+        <p class="m-0">{{ contentList.discription }}</p>
       </template>
       <template #footer>
         <Button icon="pi pi-check" label="Подробнее" />
@@ -23,7 +23,7 @@ import Button from 'primevue/button'
 import { defineProps, onMounted } from 'vue'
 import { useContent } from '@/composables/useContent'
 
-const { content } = useContent()
+const { contentList } = useContent()
 const props = defineProps({
   content: {
     type: Object,

@@ -11,7 +11,7 @@ export const useContent = () => {
   const content = ref()
   const contentList = ref([] as DocumentData)
   const newContent = ref({
-    id: createId(), 
+    id: createId(),
     image: '' as string,
     author: '' as any,
     name: '' as string,
@@ -38,9 +38,16 @@ export const useContent = () => {
 
   async function getAllContent() {
     loading.value.contentList = true
+    contentList.value.length = 0
     try {
       const querySnapshot = await getDocs(collection(db, 'contents'))
-      contentList.value = querySnapshot.docs.map((doc) => doc.data())
+      querySnapshot.forEach((doc) => {
+        const compressive = {
+          firebaseId: doc.id,
+          ...doc.data()
+        }
+        contentList.value.push(compressive)
+      })
       loading.value.contentList = false
     } catch (error) {
       console.error(error)
@@ -76,13 +83,14 @@ export const useContent = () => {
 
   async function deleteContent(id: string) {
     try {
-      if (content.value) {
-        await deleteDoc(doc(db, 'contents', id))
-      }
+      console.log(id)
+      await deleteDoc(doc(db, 'contents', id))
+      await getAllContent()
     } catch (error) {
       console.error(error)
     }
   }
+
   async function uploadImage(file: any) {
     console.log(file)
     const storage = getStorage()
