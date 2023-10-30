@@ -1,7 +1,15 @@
-import { collection, getDocs, addDoc, type DocumentData } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  addDoc,
+  type DocumentData,
+  getDoc,
+  doc,
+  setDoc
+} from 'firebase/firestore'
 import { db, storage } from '@/firebase'
 import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
 const user = ref()
@@ -12,13 +20,16 @@ const loading = ref({
   userList: false
 })
 
-const userRemake = computed(() => {
+const userToObject = computed(() => {
   if (user.value) {
     return {
-      displayName: user.value.displayName,
+      uid: user.value.uid,
       email: user.value.email,
+      displayName: user.value.displayName,
       photoURL: user.value.photoURL,
-      uid: user.value.uid
+      favourites: user.value.favourites ?? [],
+      status: user.value.status ?? 'user',
+      reviews: user.value.reviews ?? []
     }
   }
   return null
@@ -27,13 +38,19 @@ const userRemake = computed(() => {
 export const useUser = () => {
   const auth = getAuth()
 
+  // войти с помощью окна гугл
   function googleRegister() {
     const provider = new GoogleAuthProvider()
 
     signInWithPopup(auth, provider)
       .then(async (userCredential) => {
         user.value = userCredential.user
+
         await addUserToMainDatabase()
+
+        await getFromMainDatabase()
+
+        addToLocalStorage()
       })
       .catch((error) => {
         console.error(error)
@@ -43,10 +60,10 @@ export const useUser = () => {
   async function addUserToMainDatabase() {
     loading.value.user = true
     try {
-      if (userRemake.value) {
+      if (userToObject.value) {
         await getAllUsers()
         if (!checkUserInDatabase()) {
-          await addDoc(collection(db, 'users'), userRemake.value)
+          await addDoc(collection(db, 'users'), userToObject.value)
         } else {
           console.error('User already in database')
         }
@@ -57,6 +74,7 @@ export const useUser = () => {
     }
   }
 
+  // получить всех юзеров
   async function getAllUsers() {
     loading.value.userList = true
     try {
@@ -70,14 +88,70 @@ export const useUser = () => {
     }
   }
 
+  // проверка есть ли юзер в базе данных
   function checkUserInDatabase() {
-    return userList.value.some((item: any) => item.uid === userRemake.value?.uid)
+    return userList.value.some((item: any) => item.uid === userToObject.value?.uid)
   }
 
+  // получить данные из базы данных
+  async function getFromMainDatabase() {
+    await getAllUsers()
+    user.value = userList.value.find((item: any) => item.uid === user.value?.uid)
+  }
+
+  // обновить данные в базе данных
+  async function updateUserInDatabase() {
+    if (user.value) {
+      try {
+        const userDocRef = doc(db, 'users', user.value.uid)
+        const existingUserDoc = await getDoc(userDocRef)
+        if (existingUserDoc.exists()) {
+          const userData = existingUserDoc.data()
+          const updatedData = {
+            ...userData,
+            ...user.value
+          }
+          await setDoc(userDocRef, updatedData)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+
+  function addToLocalStorage() {
+    if (user.value) {
+      localStorage.setItem('user', JSON.stringify(user.value))
+    }
+  }
+
+  function getUserFromLocalStorage() {
+    const userFromLocalStorage = localStorage.getItem('user')
+    if (userFromLocalStorage) {
+      user.value = JSON.parse(userFromLocalStorage)
+    }
+  }
+
+  function removeFromLocalStorage() {
+    localStorage.removeItem('user')
+  }
+
+  // выйти из гугла
   function googleLogout() {
     auth.signOut()
     user.value = null
+
+    // удаляем из локал сторадж
+    removeFromLocalStorage()
   }
+
+  // это надо не всем
+  // для постоянной связи сервиса с базой данных
+  watch(user.value, async (newValue) => {
+    if (newValue) {
+      await updateUserInDatabase()
+    }
+  })
 
   return {
     user,
@@ -85,7 +159,10 @@ export const useUser = () => {
     googleRegister,
     googleLogout,
     getAllUsers,
-    userRemake,
-    userList
+    userToObject,
+    userList,
+    addToLocalStorage,
+    getUserFromLocalStorage,
+    removeFromLocalStorage
   }
 }

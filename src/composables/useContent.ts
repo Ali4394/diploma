@@ -3,21 +3,18 @@ import { db, storage } from '@/firebase'
 import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { ref, computed } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-
 import { useUser } from './useUser'
-
+import * as firebase from 'firebase/storage'
 
 export const useContent = () => {
   const content = ref()
   const contentList = ref([] as DocumentData)
   const newContent = ref({
-    id:'',
-    name:'',
-    image:null,
-    location:'',
-    info:'',
-    contactus:'',
+    image: '' as string,
     author: '' as any,
+    name: '' as string,
+    city: '' as string,
+    discription: '' as string
   })
 
   const loading = ref({
@@ -25,6 +22,17 @@ export const useContent = () => {
     contentList: false,
     newContent: false
   })
+
+  async function createContent() {
+    loading.value.newContent = true
+    try {
+      await addDoc(collection(db, 'contents'), newContent.value).then(async () => {
+        await getAllContent()
+      })
+    } catch (e) {
+      console.error('Error: ', e)
+    }
+  }
 
   async function getAllContent() {
     loading.value.contentList = true
@@ -51,11 +59,11 @@ export const useContent = () => {
   }
 
   async function addContent() {
-    const { userRemake } = useUser()
+    const { userToObject } = useUser()
     loading.value.newContent = true
     try {
-      if (newContent.value && userRemake.value) {
-        newContent.value.author = userRemake.value
+      if (newContent.value && userToObject.value) {
+        newContent.value.author = userToObject.value
         await addDoc(collection(db, 'contents'), newContent.value)
         loading.value.newContent = false
       }
@@ -73,15 +81,40 @@ export const useContent = () => {
       console.error(error)
     }
   }
+  async function uploadImage(file) {
+    console.log(file)
+    const storage = getStorage()
+    console.log(storage)
+    const storageRef = firebase.ref(storage, 'contents/' + file.name)
+    console.log(storageRef)
+
+    uploadBytes(storageRef, file)
+      .then(() => {
+        console.log('Файл успешно загружен!')
+
+        getDownloadURL(storageRef)
+          .then((downloadURL) => {
+            newContent.value.image = downloadURL
+          })
+          .catch((error) => {
+            console.error('Ошибка получения ссылки на загруженный файл:', error)
+          })
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки файла:', error)
+      })
+  }
 
   return {
     content,
     contentList,
     loading,
     newContent,
+    createContent,
     getAllContent,
     getContentById,
     addContent,
-    deleteContent
+    deleteContent,
+    uploadImage
   }
 }

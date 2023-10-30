@@ -1,13 +1,15 @@
 <script setup lang="ts">
-// import {  RouterView } from 'vue-router'
 import NavbarComponent from '@/components/layouts/NavbarComponent.vue'
+import UniverCard from '@/components/UniversityItem.vue'
+import AddBtn from '@/components/AddUniverModule.vue'
+import contentList from '@/components/UniversityList.vue'
 </script>
 
 <template>
-
-<NavbarComponent/>
+  <AddBtn />
+  <NavbarComponent />
+  <UniverCard :newContent="newContentData" />
+  <contentList />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
