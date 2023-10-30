@@ -42,7 +42,7 @@
       </div>
 
       <!-- <InputText id="travel" v-model="newContent.travel" /> -->
-      <Button label="Добавить" icon="pi pi-check" @click="addContent" autofocus> </Button>
+      <Button label="Добавить" icon="pi pi-check" @click="addInfo" autofocus> </Button>
     </Dialog>
   </div>
 </template>
@@ -62,8 +62,8 @@ function toogleVisible() {
   visible.value = !visible.value
 }
 
-async function addAuto() {
-  await createContent()
+async function addInfo() {
+  await addContent()
   toogleVisible()
 }
 
