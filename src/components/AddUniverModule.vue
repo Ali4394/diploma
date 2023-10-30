@@ -68,7 +68,7 @@ async function addInfo() {
   createContent()
 }
 
-async function onUpload(e) {
+async function onUpload(e:any) {
   const image = e.target.files[0]
   await uploadImage(image)
 }

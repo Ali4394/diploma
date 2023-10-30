@@ -5,16 +5,18 @@ import { ref, computed } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { useUser } from './useUser'
 import * as firebase from 'firebase/storage'
+import { createId } from '@/utils'
 
 export const useContent = () => {
   const content = ref()
   const contentList = ref([] as DocumentData)
   const newContent = ref({
+    id: createId(), 
     image: '' as string,
     author: '' as any,
     name: '' as string,
     city: '' as string,
-    discription: '' as any
+    discription: '' as string
   })
 
   const loading = ref({
@@ -72,7 +74,7 @@ export const useContent = () => {
     }
   }
 
-  async function deleteContent(id: any) {
+  async function deleteContent(id: string) {
     try {
       if (content.value) {
         await deleteDoc(doc(db, 'contents', id))

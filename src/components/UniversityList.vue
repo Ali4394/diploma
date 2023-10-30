@@ -4,14 +4,14 @@
 <template>
   <div >
     <div v-if="loading.contentList">Loading...</div>
-    <div v-else class="univers">
+    <div v-else >
       <div class="univers" v-for="contentItem in contentList" :key="contentItem.id">
         <div class="card">
           <img :src="contentItem.image" alt="Content Image" />
           <div class="card-body">
             <h3>{{ contentItem.name }}</h3>
             <p>{{ contentItem.city }}</p>
-            <p>{{ contentItem.description }}</p>
+            <p>{{ contentItem.discription }}</p>
             <button @click="deleteContent(contentItem.id)">Delete</button>
           </div>
         </div>
@@ -26,6 +26,7 @@ import { useContent } from '@/composables/useContent'
 
 export default defineComponent({
   name: 'ContentList',
+
   setup() {
     const { contentList, loading, getAllContent, deleteContent } = useContent()
 
@@ -39,7 +40,11 @@ export default defineComponent({
       deleteContent
     }
   }
-})
+
+
+
+
+});
 </script>
 
 <style scoped>
@@ -52,7 +57,7 @@ export default defineComponent({
 }
 
 .univers{
- 
+ max-width: 500px;
   display: flex;
   max-height: 500px;
   justify-content: space-between;
