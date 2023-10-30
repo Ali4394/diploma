@@ -65,6 +65,7 @@ function toogleVisible() {
 async function addInfo() {
   await addContent()
   toogleVisible()
+  createContent()
 }
 
 async function onUpload(e) {
