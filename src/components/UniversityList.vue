@@ -2,10 +2,10 @@
 <!-- используешь contentList -->
 <!-- передаешь пропсы в universityItem -->
 <template>
-  <div>
+  <div >
     <div v-if="loading.contentList">Loading...</div>
-    <div v-else>
-      <div v-for="contentItem in contentList" :key="contentItem.id">
+    <div v-else class="univers">
+      <div class="univers" v-for="contentItem in contentList" :key="contentItem.id">
         <div class="card">
           <img :src="contentItem.image" alt="Content Image" />
           <div class="card-body">
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { useContent, DocumentData } from '@/composables/useContent'
+import { useContent } from '@/composables/useContent'
 
 export default defineComponent({
   name: 'ContentList',
@@ -51,8 +51,18 @@ export default defineComponent({
   display: inline-block;
 }
 
+.univers{
+ 
+  display: flex;
+  max-height: 500px;
+  justify-content: space-between;
+  align-content: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .card img {
-  max-width: 500px;
+  max-width: 400px;
   height: auto;
+  min-width: 400px;
 }
 </style>

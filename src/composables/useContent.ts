@@ -72,7 +72,7 @@ export const useContent = () => {
     }
   }
 
-  async function deleteContent(id: string) {
+  async function deleteContent(id: any) {
     try {
       if (content.value) {
         await deleteDoc(doc(db, 'contents', id))
@@ -81,7 +81,7 @@ export const useContent = () => {
       console.error(error)
     }
   }
-  async function uploadImage(file) {
+  async function uploadImage(file: any) {
     console.log(file)
     const storage = getStorage()
     console.log(storage)
