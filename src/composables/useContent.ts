@@ -14,7 +14,7 @@ export const useContent = () => {
     author: '' as any,
     name: '' as string,
     city: '' as string,
-    discription: '' as string
+    discription: '' as any
   })
 
   const loading = ref({

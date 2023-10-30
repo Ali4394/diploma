@@ -6,10 +6,10 @@ import contentList from '@/components/UniversityList.vue'
 </script>
 
 <template>
+  <contentList />
   <AddBtn />
   <NavbarComponent />
   <UniverCard :newContent="newContentData" />
-  <contentList />
 </template>
 
 <style scoped></style>
