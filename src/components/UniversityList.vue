@@ -2,17 +2,17 @@
 <!-- используешь contentList -->
 <!-- передаешь пропсы в universityItem -->
 <template>
-  <div >
+  <div>
     <div v-if="loading.contentList">Loading...</div>
-    <div v-else class="univers" >
-      <div  v-for="contentItem in contentList" :key="contentItem.id">
+    <div v-else class="univers">
+      <div v-for="contentItem in contentList" :key="contentItem.id">
         <div class="card">
           <img :src="contentItem.image" alt="Content Image" />
           <div class="card-body">
             <h3>{{ contentItem.name }}</h3>
             <p>{{ contentItem.city }}</p>
             <p>{{ contentItem.discription }}</p>
-            <Button v-if="user" @click="deleteContent(contentItem.firebaseId)" label="Delete"/>
+            <Button v-if="user" @click="deleteContent(contentItem.firebaseId)" label="Delete" />
           </div>
         </div>
       </div>
@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import {  onMounted } from 'vue'
-import { useContent} from '@/composables/useContent'
+import { onMounted } from 'vue'
+import { useContent } from '@/composables/useContent'
 import Button from 'primevue/button'
 import { useUser } from '@/composables/useUser'
 
@@ -33,8 +33,6 @@ const { contentList, loading, getAllContent, deleteContent } = useContent()
 onMounted(() => {
   getAllContent()
 })
-
-
 </script>
 
 <style scoped>
@@ -44,11 +42,11 @@ onMounted(() => {
   border: 1px solid #ccc;
   border-radius: 5px;
   display: inline-block;
- width: 500px;
- height: 500px;
+  width: 460px;
+  height: 500px;
 }
 
-.univers{
+.univers {
   display: flex;
   max-height: 460px;
   justify-content: space-around;
@@ -60,6 +58,6 @@ onMounted(() => {
   max-width: 400px;
   height: auto;
   min-width: 400px;
-  margin:10px 10px;
+  margin: 10px 10px;
 }
 </style>
