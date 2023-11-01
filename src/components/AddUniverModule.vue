@@ -1,6 +1,6 @@
 <template>
   <div class="card flex justify-content-center">
-    <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
+    <Button label="Show" icon="pi pi-external-link" @click="visible = true" class="Addbtn" />
     <Dialog v-model:visible="visible" modal header="Добавить универ" :style="{ width: '50vw' }">
       <form class="input__wrapper form" enctype="multipart/form-data">
         <input
@@ -66,12 +66,12 @@ async function addInfo() {
   await addContent()
   toogleVisible()
   createContent()
-  setTimeout(function(){
-	location.reload();
-}, 2000);
+  setTimeout(function () {
+    location.reload()
+  }, 2000)
 }
 
-async function onUpload(e:any) {
+async function onUpload(e: any) {
   const image = e.target.files[0]
   await uploadImage(image)
 }

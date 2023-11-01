@@ -1,11 +1,18 @@
 <template>
   <div class="menu-bar">
+    <div class="flex-auto">
+      <img
+        src="./logo.png"
+        class="flex align-items-center justify-content-center mr-2"
+        style="width: 60px; height: auto"
+      />
+    </div>
     <button @click="toggleMobileMenu" class="mobile-menu-button">&#9776;</button>
     <ul :class="{ 'show-mobile-menu': isMobileMenuOpen }">
-      <li @click="handleMenuItemClick('Home')">Home</li>
-      <li @click="handleMenuItemClick('About')">About</li>
-      <li @click="handleMenuItemClick('Services')">Services</li>
-      <li @click="handleMenuItemClick('Contact')">Contact</li>
+      <li @click="handleMenuItemClick('main')">Главная</li>
+      <li @click="handleMenuItemClick('univers')">Университеты</li>
+      <li @click="handleMenuItemClick('course')">Курсы</li>
+      <li @click="handleMenuItemClick('info')">Об Южной Корее</li>
     </ul>
     <div class="side">
       <p-button
@@ -30,18 +37,41 @@
 import PButton from 'primevue/button'
 import { useUser } from '@/composables/useUser'
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const { user, googleRegister, googleLogout } = useUser()
 
 const isMobileMenuOpen = ref(false)
+const router = useRouter()
+const route = useRoute()
+
+const active = ref(0)
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-const handleMenuItemClick = (item: any) => {
-  // Implement your functionality for each menu item here
-  console.log(`Clicked on ${item}`)
+function handleMenuItemClick(item: any) {
+  item = ref([
+    {
+      label: 'main',
+      route: '/'
+    },
+    {
+      label: 'univers',
+      route: '/cards'
+    },
+    {
+      label: 'Table',
+      icon: 'pi pi-fw pi-pencil',
+      route: '/table'
+    },
+    {
+      label: 'Contact us',
+      icon: 'pi pi-fw pi-file',
+      route: '/contact'
+    }
+  ])
 }
 </script>
 
@@ -52,12 +82,12 @@ const handleMenuItemClick = (item: any) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 5px 20px;
 }
 
 .mobile-menu-button {
   display: none;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
 }
 
@@ -66,6 +96,7 @@ ul {
   padding: 0;
   margin: 0;
   display: flex;
+  margin-right: 300px;
 }
 
 li {
@@ -95,9 +126,23 @@ p-button {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 70px;
     left: 20px;
     background-color: #333;
+    z-index: 5;
+  }
+
+  li {
+    width: 200px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .show-mobile-menu {
