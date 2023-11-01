@@ -1,7 +1,6 @@
 <template>
   <UniversityList />
   <AddBtn />
-  <div><h3>Working</h3></div>
 </template>
 
 <script setup lang="ts">

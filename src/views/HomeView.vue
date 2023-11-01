@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <div class="carousel-container">
       <button @click="previousImage" class="nav-button">Back</button>
       <transition name="fade" mode="out-in">
@@ -11,7 +11,10 @@
     <button @click="nextImage" class="mob-button">Next</button>
     <div class="info-section">
       <h1>TeachMe</h1>
-      <p>Курсы корейского языка 🙋‍♂️ Подготовка к топику👩‍🏫 Помощь поступающим в ВУЗы Кореи👩‍🎓</p>
+      <p>📚 Курсы корейского языка 📚</p>
+    <p>📝  Подготовка к TOPIK 💬</p>
+    <p>🎓 Помощь поступающим в ВУЗы Кореи 🏫</p>
+   
     </div>
   </div>
 </template>
@@ -41,6 +44,36 @@ const previousImage = () => {
 </script>
 
 <style scoped>
+
+.home{
+  width: 1200px;
+  margin: 20px auto;
+}
+p {
+  font-size: 24px;
+  text-align: center;
+  margin: 20px;
+  animation: fadeIn 2s both;
+}
+
+p:nth-child(1) {
+  animation-delay: 1.5s;
+}
+
+p:nth-child(2) {
+  animation-delay: 1s;
+}
+
+p:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
 .carousel-container {
   position: relative;
   max-width: 100%;
@@ -50,7 +83,7 @@ const previousImage = () => {
 }
 
 .carousel-image {
-  width: 500px;
+  width: 600px;
   height: 300px;
 }
 
@@ -70,7 +103,7 @@ const previousImage = () => {
 }
 
 .nav-button {
-  background-color: #2a3d52;
+  background-color: #222e51;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -80,7 +113,7 @@ const previousImage = () => {
 }
 
 .nav-button:hover {
-  background-color: #2a3d52;
+  background-color: #222e51;
 }
 .mob-button {
   display: none;
@@ -92,7 +125,7 @@ const previousImage = () => {
 
   .mob-button {
     display: inline-block;
-    background-color: #2a3d52;
+    background-color: #222e51;
     color: #fff;
     padding: 10px 20px;
     border: none;

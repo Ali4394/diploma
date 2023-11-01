@@ -1,18 +1,19 @@
 <template>
+  <div class="cont">
   <div class="menu-bar">
-    <div class="flex-auto">
+    <div class="flex-auto logo">
       <img
         src="./logo.png"
         class="flex align-items-center justify-content-center mr-2"
-        style="width: 60px; height: auto"
+        style="width: 80px; height: auto"
       />
     </div>
     <button @click="toggleMobileMenu" class="mobile-menu-button">&#9776;</button>
     <ul :class="{ 'show-mobile-menu': isMobileMenuOpen }">
-      <li @click="handleMenuItemClick('main')">Главная</li>
-      <li @click="handleMenuItemClick('univers')">Университеты</li>
-      <li @click="handleMenuItemClick('course')">Курсы</li>
-      <li @click="handleMenuItemClick('info')">Об Южной Корее</li>
+      <li @click="handleMenuItemClick('/')"><strong>Главная</strong></li>
+      <li v-on:click="handleMenuItemClick('/univers')"><strong>Университеты</strong></li>
+      <li @click="handleMenuItemClick('/course')"><strong>Курсы</strong></li>
+      <li @click="handleMenuItemClick('/info')"><strong>Об Южной Корее</strong></li>
     </ul>
     <div class="side">
       <p-button
@@ -31,58 +32,44 @@
       />
     </div>
   </div>
+</div>
 </template>
 
 <script setup lang="ts">
 import PButton from 'primevue/button'
 import { useUser } from '@/composables/useUser'
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const { user, googleRegister, googleLogout } = useUser()
 
 const isMobileMenuOpen = ref(false)
 const router = useRouter()
-const route = useRoute()
 
-const active = ref(0)
-
-const toggleMobileMenu = () => {
+function toggleMobileMenu () {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-function handleMenuItemClick(item: any) {
-  item = ref([
-    {
-      label: 'main',
-      route: '/'
-    },
-    {
-      label: 'univers',
-      route: '/cards'
-    },
-    {
-      label: 'Table',
-      icon: 'pi pi-fw pi-pencil',
-      route: '/table'
-    },
-    {
-      label: 'Contact us',
-      icon: 'pi pi-fw pi-file',
-      route: '/contact'
-    }
-  ])
-}
+function handleMenuItemClick (route: string){
+  router.push(route);
+};
 </script>
 
 <style scoped>
+
+.cont{
+  background-color: #222e51;
+  height: auto;
+}
 .menu-bar {
-  background-color: #333;
+  background-color: #222e51;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
+  padding: 10px 20px;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .mobile-menu-button {
@@ -91,12 +78,17 @@ function handleMenuItemClick(item: any) {
   cursor: pointer;
 }
 
+.logo{
+position: relative;
+left: 15%;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
-  margin-right: 300px;
+  margin: 0 auto;
 }
 
 li {
@@ -111,11 +103,12 @@ li:hover {
 .side {
   display: flex;
   align-items: center;
+  position: relative;
+  right: 90px;
+ 
 }
 
-p-button {
-  margin-left: 20px;
-}
+
 
 @media (max-width: 768px) {
   .mobile-menu-button {
@@ -127,8 +120,9 @@ p-button {
     flex-direction: column;
     position: absolute;
     top: 70px;
-    left: 20px;
-    background-color: #333;
+    left: 300px;
+    background-color: #222e51;
+    width: 100%;
     z-index: 5;
   }
 

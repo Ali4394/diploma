@@ -1,6 +1,6 @@
 <template>
   <div class="card flex justify-content-center">
-    <Button label="Show" icon="pi pi-external-link" @click="visible = true" class="Addbtn" />
+    <Button v-if="user" label="Добавить Универ" icon="pi pi-external-link" @click="visible = true" class="Addbtn" />
     <Dialog v-model:visible="visible" modal header="Добавить универ" :style="{ width: '50vw' }">
       <form class="input__wrapper form" enctype="multipart/form-data">
         <input
@@ -53,6 +53,9 @@ import { ref } from 'vue'
 import InputText from 'primevue/inputtext'
 import { useContent } from '@/composables/useContent'
 import Dropdown from 'primevue/dropdown'
+import { useUser } from '@/composables/useUser'
+
+const { user } = useUser()
 
 const { newContent, addContent, uploadImage, createContent } = useContent()
 

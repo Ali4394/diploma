@@ -39,25 +39,25 @@ onMounted(() => {
 .card {
   margin: 1rem;
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #222e51;
   border-radius: 5px;
   display: inline-block;
-  width: 460px;
-  height: 500px;
+  width: 250px;
+  height: 380px;
 }
 
 .univers {
   display: flex;
-  max-height: 460px;
-  justify-content: space-around;
+  max-height: 20px;
+  justify-content: space-between;
   align-content: stretch;
   flex-wrap: wrap;
   flex-direction: row;
 }
 .card img {
-  max-width: 400px;
+  max-width: 200px;
   height: auto;
-  min-width: 400px;
+  min-width: 200px;
   margin: 10px 10px;
 }
 </style>
