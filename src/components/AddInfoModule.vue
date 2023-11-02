@@ -30,23 +30,9 @@
         </label>
       </form>
       <div class="p-field">
-        <InputText placeholder="Название Универа" v-model.text="newContent.name" />
+        <InputText placeholder="Название Универа" v-model.text="newInfo.name" />
 
-        <div class="p-field">
-          <label for="city">Город</label>
-          <Dropdown
-            id="city"
-            v-model="newContent.city"
-            editable
-            :options="korea"
-            option-label="city"
-            option-value="city"
-            placeholder="Город"
-          />
-        </div>
-        <InputText placeholder="Описание" v-model.text="newContent.discription" />
-
-        <InputText placeholder="Описание" v-model.text="newContent.condition" />
+        <InputText placeholder="Описание" v-model.text="newInfo.discription" />
       </div>
 
       <!-- <InputText id="travel" v-model="newContent.travel" /> -->
@@ -59,13 +45,13 @@
 import Button from 'primevue/button'
 import { ref } from 'vue'
 import InputText from 'primevue/inputtext'
-import { useContent } from '@/composables/useContent'
+import { useInfo } from '@/composables/useInfo'
 import Dropdown from 'primevue/dropdown'
 import { useUser } from '@/composables/useUser'
 
 const { user } = useUser()
 
-const { newContent, addContent, uploadImage, createContent } = useContent()
+const { newInfo, addContent, uploadImage, createContent } = useInfo()
 
 const visible = ref(false)
 
@@ -86,15 +72,6 @@ async function onUpload(e: any) {
   const image = e.target.files[0]
   await uploadImage(image)
 }
-
-const korea = [
-  { city: 'Seoul' },
-  { city: 'Pusan' },
-  { city: 'Deagu' },
-  { city: 'Daejon' },
-  { city: 'Kengju' },
-  { city: 'Seajon' }
-]
 </script>
 
 <style scoped></style>

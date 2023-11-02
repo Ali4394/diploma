@@ -22,8 +22,12 @@ const router = createRouter({
       path: '/info',
       name: 'info',
       component: () => import('../sections/InfoSection.vue')
+    },
+    {
+      path: '/page/:firebaseId',
+      name: 'page',
+      component: () => import('../views/UniversityIdPage.vue')
     }
-   
   ]
 })
 

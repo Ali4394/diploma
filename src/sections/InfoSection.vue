@@ -1,6 +1,9 @@
 <template>
-    <div><h1>info</h1></div>
+  <InfosityList />
+  <AddBtn />
 </template>
 
 <script setup lang="ts">
+import InfosityList from '@/components/InfoList.vue'
+import AddBtn from '@/components/AddInfoModule.vue'
 </script>

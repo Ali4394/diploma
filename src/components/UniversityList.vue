@@ -13,6 +13,27 @@
             <p>{{ contentItem.city }}</p>
             <p>{{ contentItem.discription }}</p>
             <Button v-if="user" @click="deleteContent(contentItem.firebaseId)" label="Delete" />
+
+            <Button
+              label="Хочу поступить "
+              icon="pi pi-external-link"
+              @click="visible = true"
+              class="Addbtn"
+            />
+            <Dialog
+              v-model:visible="visible"
+              modal
+              header="напишите фио и номер телефона"
+              :style="{ width: '50vw' }"
+            >
+              <div class="p-field">
+                <InputText placeholder="ФИО" v-model.text="newClient.name" />
+
+                <InputText placeholder="Номер тел" v-model.text="newClient.discription" />
+              </div>
+
+              <Button label="Добавить" icon="pi pi-check" @click="addInfo" autofocus> </Button>
+            </Dialog>
           </div>
         </div>
       </div>
@@ -25,14 +46,39 @@ import { onMounted } from 'vue'
 import { useContent } from '@/composables/useContent'
 import Button from 'primevue/button'
 import { useUser } from '@/composables/useUser'
+import { useRouter, useRoute } from 'vue-router'
+import InputText from 'primevue/inputtext'
+import { useClient } from '@/composables/useClients'
+import { ref } from 'vue'
 
 const { user } = useUser()
 
 const { contentList, loading, getAllContent, deleteContent } = useContent()
+const { newClient, addContent, createContent } = useClient()
+const router = useRouter()
 
 onMounted(() => {
   getAllContent()
 })
+
+const visible = ref(false)
+
+function goToCarUrl(firebaseId: any) {
+  router.push(`/page/${firebaseId}`)
+}
+
+function toogleVisible() {
+  visible.value = !visible.value
+}
+
+async function addInfo() {
+  await addContent()
+  toogleVisible()
+  createContent()
+  setTimeout(function () {
+    location.reload()
+  }, 2000)
+}
 </script>
 
 <style scoped>

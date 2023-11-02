@@ -24,44 +24,43 @@
 </template>
 
 <script setup lang="ts">
-import 'font-awesome/css/font-awesome.css';
+// import 'font-awesome/css/font-awesome.css';
 </script>
 
 <style scoped>
-
-.const{
-  width:1400px;
+.const {
   background-color: #222e51;
-  height:auto;
+  height: auto;
+  width: 100%; /* Измените ширину на 100% */
+  position: fixed;
+  bottom: 0;
+  display: flex; /* Используйте flexbox для центрирования по вертикали */
+  justify-content: center; /* Центрируйте по горизонтали */
 }
 
 .footer {
   background-color: #222e51;
   color: #fff;
-  padding: 3% 0;
+  padding: 0;
   text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  margin: 0 auto;
-
-  }
+  width: 100%; /* Измените ширину на 100% */
+  display: flex; /* Используйте flexbox для центрирования по вертикали */
+  justify-content: center; /* Центрируйте по горизонтали */
+}
 
 .footer-info {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line on small screens */
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
 .footer-item {
   padding: 10px;
-  flex: 1; /* Make each item equally distribute on small screens */
+  flex: 1;
   text-align: center;
 }
 
-/* Style the email and Instagram links */
 .footer-item a {
   color: #fff;
   text-decoration: none;
@@ -82,20 +81,11 @@ import 'font-awesome/css/font-awesome.css';
 
 /* Media query for smaller screens (adjust as needed) */
 @media (max-width: 768px) {
-  .footer{
-    width:1000pxpx;
-    background-color: #222e51;
-    height:auto;
-    position: fixed;
-  bottom: 0;
+  .footer {
+    width: 100%; /* Измените ширину на 100% */
   }
-
   .footer-info {
     flex-direction: column; /* Stack items vertically on small screens */
-  }
-
-  .footer-item {
-    text-align: center;
   }
 }
 </style>
