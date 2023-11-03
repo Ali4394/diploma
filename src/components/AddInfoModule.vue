@@ -19,12 +19,7 @@
         />
         <label for="inputfile" class="inputfile-button">
           <span class="input__file-icon-wrapper">
-            <img
-              class="input__file-icon"
-              src="@/assets/uploadImage.png"
-              alt="Выбрать файл"
-              width="25"
-            />
+            <img class="input__file-icon" src="" alt="Выбрать файл" width="25" />
           </span>
           <span class="input__file-button-text"></span>
         </label>
