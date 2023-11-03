@@ -108,10 +108,10 @@ li:hover {
   right: 0;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 938px) {
   .logo {
     position: relative;
-    left: 8%
+    left: 7%
     ;
   }
 }
