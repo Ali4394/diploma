@@ -14,7 +14,8 @@ export const useClient = () => {
     id: createId(),
     author: '' as any,
     name: '' as string,
-    discription: '' as string
+    discription: '' as string,
+    course: '' as string
   })
 
   const loading = ref({

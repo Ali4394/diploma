@@ -74,8 +74,8 @@ p {
 
 .carousel-image {
   width: 100%;
-  max-width: 400px;
-  max-height: 200px;
+  max-width: 600px;
+  max-height: 300px;
 }
 
 .info-section {

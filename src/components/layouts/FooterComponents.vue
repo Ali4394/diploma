@@ -3,7 +3,7 @@
     <div class="footer">
       <div class="footer-info">
         <div class="footer-item">
-          <p>Address: Abai ave, Almaty, Kazakhstan 050046</p>
+          <p>Address: Abai ave, Almaty</p>
         </div>
         <div class="footer-item">
           <p>Phone: 8775 069 4394</p>

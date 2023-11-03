@@ -2,7 +2,7 @@
 <!-- используешь contentList -->
 <!-- передаешь пропсы в universityItem -->
 <template>
-  <div>
+  <div class="const">
     <div v-if="loading.contentList">Loading...</div>
     <div v-else class="univers">
       <div v-for="contentItem in contentList" :key="contentItem.id">
@@ -32,7 +32,7 @@
                 <InputText placeholder="Номер тел" v-model.text="newClient.discription" />
               </div>
 
-              <Button label="Добавить" icon="pi pi-check" @click="addInfo" autofocus> </Button>
+              <Button label="Отправить" icon="pi pi-check" @click="addInfo" autofocus> </Button>
             </Dialog>
           </div>
         </div>
@@ -55,17 +55,12 @@ const { user } = useUser()
 
 const { contentList, loading, getAllContent, deleteContent } = useContent()
 const { newClient, addContent, createContent } = useClient()
-const router = useRouter()
 
 onMounted(() => {
   getAllContent()
 })
 
 const visible = ref(false)
-
-function goToCarUrl(firebaseId: any) {
-  router.push(`/page/${firebaseId}`)
-}
 
 function toogleVisible() {
   visible.value = !visible.value
@@ -90,6 +85,7 @@ async function addInfo() {
   display: inline-block;
   width: 250px;
   height: 380px;
+  margin-bottom: 30%;
 }
 
 .univers {

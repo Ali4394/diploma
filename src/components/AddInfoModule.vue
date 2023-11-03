@@ -2,12 +2,12 @@
   <div class="card flex justify-content-center">
     <Button
       v-if="user"
-      label="Добавить Универ"
+      label="Добавить Новость"
       icon="pi pi-external-link"
       @click="visible = true"
       class="Addbtn"
     />
-    <Dialog v-model:visible="visible" modal header="Добавить универ" :style="{ width: '50vw' }">
+    <Dialog v-model:visible="visible" modal header="Добавить Новость" :style="{ width: '50vw' }">
       <form class="input__wrapper form" enctype="multipart/form-data">
         <input
           id="inputfile"
@@ -30,12 +30,11 @@
         </label>
       </form>
       <div class="p-field">
-        <InputText placeholder="Название Универа" v-model.text="newInfo.name" />
+        <InputText placeholder="Название" v-model.text="newInfo.name" />
 
         <InputText placeholder="Описание" v-model.text="newInfo.discription" />
       </div>
 
-      <!-- <InputText id="travel" v-model="newContent.travel" /> -->
       <Button label="Добавить" icon="pi pi-check" @click="addInfo" autofocus> </Button>
     </Dialog>
   </div>
@@ -74,4 +73,18 @@ async function onUpload(e: any) {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.Addbtn {
+  margin-top: 30%;
+  margin-left: 40%;
+  z-index: 6;
+  position: fixed;
+}
+@media (max-width: 668px) {
+  .Addbtn {
+    margin-top: 120%;
+    margin-left: 10%;
+    z-index: 6;
+  }
+}
+</style>

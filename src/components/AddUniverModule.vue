@@ -97,4 +97,11 @@ const korea = [
 ]
 </script>
 
-<style scoped></style>
+<style scoped>
+.Addbtn {
+  margin-top: 30%;
+  margin-left: 40%;
+  z-index: 6;
+  position: fixed;
+}
+</style>

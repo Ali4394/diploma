@@ -7,3 +7,5 @@
 import UniversityList from '@/components/UniversityList.vue'
 import AddBtn from '@/components/AddUniverModule.vue'
 </script>
+
+<style scoped></style>
