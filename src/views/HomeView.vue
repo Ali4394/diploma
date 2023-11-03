@@ -11,6 +11,15 @@
       <p>📝 Подготовка к TOPIK 💬</p>
       <p>🎓 Помощь поступающим в ВУЗы Кореи 🏫</p>
     </div>
+    <iframe
+      width="460"
+      height="315"
+      src="https://www.youtube.com/embed/C8h2CEOlXQ4?si=h00pr7TNSqm4bNdM"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
   </div>
 </template>
 
@@ -57,6 +66,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 p {
