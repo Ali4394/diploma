@@ -108,6 +108,14 @@ li:hover {
   right: 0;
 }
 
+@media (max-width: 868px) {
+  .logo {
+    position: relative;
+    left: 8%
+    ;
+  }
+}
+
 @media (max-width: 768px) {
   ul {
     display: none; /* Покажите список в мобильной версии */
@@ -139,5 +147,6 @@ li:hover {
   .show-mobile-menu {
     display: flex;
   }
+
 }
 </style>

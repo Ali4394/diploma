@@ -12,7 +12,7 @@
             <h3>{{ contentItem.name }}</h3>
             <p>{{ contentItem.city }}</p>
             <p>{{ contentItem.discription }}</p>
-            <Button v-if="user" @click="deleteContent(contentItem.firebaseId)" label="Delete" />
+            <Button v-if="user" class="Addbtn"  @click="deleteContent(contentItem.firebaseId)" label="Delete" icon="pi pi-trash" />
 
             <Button
               label="Хочу поступить "
@@ -46,7 +46,7 @@ import { onMounted } from 'vue'
 import { useContent } from '@/composables/useContent'
 import Button from 'primevue/button'
 import { useUser } from '@/composables/useUser'
-import { useRouter, useRoute } from 'vue-router'
+
 import InputText from 'primevue/inputtext'
 import { useClient } from '@/composables/useClients'
 import { ref } from 'vue'
@@ -84,7 +84,7 @@ async function addInfo() {
   border-radius: 5px;
   display: inline-block;
   width: 250px;
-  height: 380px;
+  height: auto;
   margin-bottom: 30%;
 }
 
@@ -101,5 +101,9 @@ async function addInfo() {
   height: auto;
   min-width: 200px;
   margin: 10px 10px;
+}
+
+.Addbtn{
+  margin: 3px;
 }
 </style>

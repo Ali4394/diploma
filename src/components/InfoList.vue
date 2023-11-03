@@ -11,7 +11,7 @@
         <div class="card-body">
           <h3>{{ infoItem.name }}</h3>
           <p>{{ infoItem.discription }}</p>
-          <Button v-if="user" @click="deleteContent(infoItem.firebaseId)" label="Delete" />
+          <Button v-if="user" @click="deleteContent(infoItem.firebaseId)" label="Delete" icon="pi pi-trash" />
         </div>
       </div>
     </div>

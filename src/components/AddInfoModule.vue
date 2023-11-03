@@ -3,9 +3,12 @@
     <Button
       v-if="user"
       label="Добавить Новость"
-      icon="pi pi-external-link"
+      icon="pi pi-pencil"
       @click="visible = true"
       class="Addbtn"
+      severity="success" raised
+      size="large"
+
     />
     <Dialog v-model:visible="visible" modal header="Добавить Новость" :style="{ width: '50vw' }">
       <form class="input__wrapper form" enctype="multipart/form-data">
@@ -70,16 +73,10 @@ async function onUpload(e: any) {
 
 <style scoped>
 .Addbtn {
-  margin-top: 30%;
-  margin-left: 40%;
   z-index: 6;
   position: fixed;
+  left: 70%;
+  top: 10%;
 }
-@media (max-width: 668px) {
-  .Addbtn {
-    margin-top: 120%;
-    margin-left: 10%;
-    z-index: 6;
-  }
-}
+
 </style>

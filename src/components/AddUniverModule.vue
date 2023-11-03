@@ -3,9 +3,11 @@
     <Button
       v-if="user"
       label="Добавить Универ"
-      icon="pi pi-external-link"
+      icon="pi pi-pencil"
       @click="visible = true"
       class="Addbtn"
+      severity="success" raised
+      size="large"
     />
     <Dialog v-model:visible="visible" modal header="Добавить универ" :style="{ width: '50vw' }">
       <form class="input__wrapper form" enctype="multipart/form-data">
@@ -94,9 +96,9 @@ const korea = [
 
 <style scoped>
 .Addbtn {
-  margin-top: 30%;
-  margin-left: 40%;
   z-index: 6;
   position: fixed;
+  left: 70%;
+  top: 10%;
 }
 </style>
